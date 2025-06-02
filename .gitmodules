@@ -1,0 +1,3 @@
+[submodule "modules/mutagenic_engine"]
+	path = modules/mutagenic_engine
+	url = git@github.com:cbinners/mutagenic_engine
