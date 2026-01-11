@@ -395,8 +395,3 @@ $RECYCLE.BIN/
 *.msp
 *.lnk
 *.generated.props
-
-
-# Custom Stuff
-mutagenic_engine/
-godotsteam/
