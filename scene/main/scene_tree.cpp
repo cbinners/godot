@@ -1581,6 +1581,21 @@ Node *SceneTree::get_first_node_in_group(const StringName &p_group) {
 	return E->value.nodes[0];
 }
 
+Node *SceneTree::get_random_node_in_group(const StringName &p_group) {
+	_THREAD_SAFE_METHOD_
+	HashMap<StringName, Group>::Iterator E = group_map.find(p_group);
+	if (!E) {
+		return nullptr; // No group.
+	}
+
+	int count = E->value.nodes.size();
+	if (count == 0) {
+		return nullptr;
+	}
+
+	return E->value.nodes[rand() % count];
+}
+
 Vector<Node *> SceneTree::get_nodes_in_group(const StringName &p_group) {
 	_THREAD_SAFE_METHOD_
 	HashMap<StringName, Group>::Iterator E = group_map.find(p_group);
@@ -1922,6 +1937,7 @@ void SceneTree::_bind_methods() {
 
 	ClassDB::bind_method(D_METHOD("get_nodes_in_group", "group"), &SceneTree::_get_nodes_in_group);
 	ClassDB::bind_method(D_METHOD("get_first_node_in_group", "group"), &SceneTree::get_first_node_in_group);
+	ClassDB::bind_method(D_METHOD("get_random_node_in_group", "group"), &SceneTree::get_random_node_in_group);
 	ClassDB::bind_method(D_METHOD("get_node_count_in_group", "group"), &SceneTree::get_node_count_in_group);
 
 	ClassDB::bind_method(D_METHOD("set_current_scene", "child_node"), &SceneTree::set_current_scene);
